@@ -1,4 +1,4 @@
-:80 {
-    root * /srv/www/build
-    file_server
+:8080 {
+	root * /srv/www/dist
+	file_server
 }
