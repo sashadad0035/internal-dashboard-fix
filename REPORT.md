@@ -136,3 +136,22 @@ http://localhost/api/health → {"status":"OK"}
 ## Висновок
 
 Було знайдено та виправлено критичні помилки конфігурації Docker, середовища виконання та маршрутизації. Після внесення змін система працює відповідно до очікувань.
+
+## Security check
+
+Було виконано базову перевірку безпеки.
+
+Результати:
+- Додано HTTP security headers:
+  - Content-Security-Policy
+  - X-Frame-Options
+  - X-Content-Type-Options
+  - Referrer-Policy
+  - Permissions-Policy
+- Flask debug mode не використовується.
+- У контейнері `app` присутня тільки змінна `APP_ENV=dev`.
+- Зовні опублікований тільки порт 80 через Traefik.
+- Внутрішні порти backend `8000` та Caddy `8080` не доступні напряму з host.
+
+Висновок:
+Система має одну точку входу через Traefik, а внутрішні сервіси ізольовані всередині Docker network.
